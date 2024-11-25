@@ -1,0 +1,1 @@
+EMAIL_ALREADY_REGISTERED = "Thsi email is already registered"
