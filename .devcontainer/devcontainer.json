@@ -1,0 +1,29 @@
+{   "name": "vrn_assignment",
+    "dockerComposeFile": "../docker/docker-compose.yaml",
+    "service": "vrn_django", 
+	"runServices": [
+		"vrn_django",
+		"vrn_postgres",
+		"vrn_pgadmin"
+	],
+    "workspaceFolder": "/vrn_assignment",
+    "customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"batisteo.vscode-django",
+				"streetsidesoftware.code-spell-checker",
+				"ms-python.black-formatter",
+				"ms-python.isort",
+				"njpwerner.autodocstring",
+				"eamodio.gitlens"
+			],
+			"settings": {
+				"editor.codeActionsOnSave": {
+					"source.fixAll": true,
+					"source.organizeImports": true
+				}
+			}
+		}
+	}
+} 
