@@ -78,5 +78,5 @@ class RegisterManager(APIView):
             else:
                 return Response({'msg':"You are not authorized"},status=status.HTTP_403_FORBIDDEN)
         else:
-            return Response({'msg':"You are not authenticated"})
+            return Response({'msg':"You are not authenticated"},status = status.HTTP_401_UNAUTHORIZED)
 

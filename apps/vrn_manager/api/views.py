@@ -38,18 +38,7 @@ class EventRegisterView(APIView):
                 return Response({'msg':'you are not authenticated'},status = status.HTTP_401_UNAUTHORIZED)
         
 
-         
-class EventDetailsView(APIView):
-    def get(self,request,pk):
-        if request.user.is_authenticated:
-            if RoleUserMapping.objects.filter(role__parent='MANAGER',user = request.user).exists():
-                event = Events.objects.filter(id = pk,org__user = request.user)
-                serializer = EventSerializer(event,many=True)
-                return Response(serializer.data)
-            else:
-                return Response({'msg':'you are not authorized'},status = status.HTTP_403_FORBIDDEN)
-        else:
-                return Response({'msg':'you are not authenticated'},status = status.HTTP_401_UNAUTHORIZED)
+        
 
 class CancelEvent(APIView):
     def post(self, request, pk):

@@ -22,5 +22,8 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/',include('apps.vrn_auth.api.urls')),
+    path('common/',include('apps.vrn_common.api.urls')),
     path('manager/',include('apps.vrn_manager.api.urls')),
+    path('user/',include('apps.vrn_user.api.urls')),
+
 ]

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'apps.vrn_auth',
     'apps.vrn_common',
-    'apps.vrn_manager'
+    'apps.vrn_manager',
+    'apps.vrn_user'
 ]
 
 MIDDLEWARE = [
