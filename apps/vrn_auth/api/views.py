@@ -86,3 +86,30 @@ class LogoutView(APIView):
             token = RefreshToken(refresh_token)
             token.blacklist()
             return Response({'msg':'Logout Successfully'})
+     
+class GetAllUsers(APIView):
+    def get(self,request):
+        if request.user.is_authenticated:
+            if RoleUserMapping.objects.filter(user = request.user,role__parent='ADMIN').exists():
+                users = RoleUserMapping.objects.filter(role__parent='USER').values(
+                    'user__email','user__first_name'
+                )
+                return Response(list(users))
+            else:
+                return Response({'msg':status_message.NOT_AUTHORIZED},status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
+
+
+class GetAllManagers(APIView):
+    def get(self,request):
+        if request.user.is_authenticated:
+            if RoleUserMapping.objects.filter(user = request.user,role__parent='ADMIN').exists():
+                managers = Organization.objects.filter(deleted_status = False).values(
+                    "user__email","user__first_name","name","description","address","phone_number"
+                )
+                return Response(list(managers))
+            else:
+                return Response({'msg':status_message.NOT_AUTHORIZED},status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
