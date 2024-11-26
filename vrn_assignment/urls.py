@@ -21,5 +21,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/',include('apps.vrn_auth.api.urls'))
+    path('auth/',include('apps.vrn_auth.api.urls')),
+    path('manager/',include('apps.vrn_manager.api.urls')),
 ]
