@@ -5,6 +5,7 @@ from apps.vrn_manager.models import Organization,Events
 from rest_framework.response import Response
 from rest_framework import status
 from apps.vrn_user.models import Registration
+from common.constants import status_message
 class AllOrganizationView(APIView):
     def get(self,request):
         if request.user.is_authenticated:
@@ -12,9 +13,9 @@ class AllOrganizationView(APIView):
                 org = list(Organization.objects.filter(deleted_status=False).values('user__first_name','user__email','name','description','address','phone_number'))
                 return Response(org)
             else:
-                return Response({'msg':"You are not authorized"},status=status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status=status.HTTP_403_FORBIDDEN)
         else:
-            return Response({'msg':"You are not authenticated"},status = status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
             
                 
 class EventOrganizationWise(APIView):
@@ -28,9 +29,9 @@ class EventOrganizationWise(APIView):
                 serializer = EventSerializer(events,many=True)
                 return Response(serializer.data)
             else:
-                return Response({'msg':'you are not authorized'},status = status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status = status.HTTP_403_FORBIDDEN)
         else:
-                return Response({'msg':'you are not authenticated'},status = status.HTTP_401_UNAUTHORIZED)
+                return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
         
 
 class EventDetailsView(APIView):
@@ -41,9 +42,9 @@ class EventDetailsView(APIView):
                 serializer = EventSerializer(event,many=True)
                 return Response(serializer.data)
             else:
-                return Response({'msg':'you are not authorized'},status = status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status = status.HTTP_403_FORBIDDEN)
         else:
-                return Response({'msg':'you are not authenticated'},status = status.HTTP_401_UNAUTHORIZED)
+                return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
         
 class GetAllRegistrationsView(APIView):
     def get(self, request,pk):
@@ -59,6 +60,6 @@ class GetAllRegistrationsView(APIView):
                 }
                 return Response(data)
             else:
-                return Response({'msg':'you are not authorized'},status = status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status = status.HTTP_403_FORBIDDEN)
         else:
-            return Response({'msg': 'You are not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)    
+            return Response({'msg':status_message.NOT_AUTHENTICATED}, status=status.HTTP_401_UNAUTHORIZED)    

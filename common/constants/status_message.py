@@ -1,1 +1,11 @@
-EMAIL_ALREADY_REGISTERED = "Thsi email is already registered"
+EMAIL_ALREADY_REGISTERED = "This email is already registered"
+NOT_AUTHORIZED="You are not authorized"
+NOT_AUTHENTICATED="You are not authenticated"
+EVENT_REGISTERED="Event Registered Successfully"
+EVENT_NOT_FOUND = 'Event not Found'
+EVENT_STARTED='Event has already started.'
+EVENT_CANCELLED='Event Cancelled Successfully'
+ALREADY_REGISTERED='You are already registered'
+REACHED_MAX_CAPACITY='This event has reached maximum capacity'
+SUCCESSFULLY_REGISTERED='You are successfully registered for this event'
+REGISTRATION_CANCELLED='Registration Cancelled Successfully'

@@ -39,10 +39,10 @@ class RegisterUser(APIView):
                 serializer = RegisterUserSerializer(request.user)
                 return Response(serializer.data)
             else:
-                return Response({'msg':"you are not authorized"},status=status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status=status.HTTP_403_FORBIDDEN)
 
         else:
-            return Response({'msg':"you are not authenticated"},status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg':status_message.NOT_AUTHENTICATED},status=status.HTTP_401_UNAUTHORIZED)
         
 class RegisterManager(APIView):
     def post(self,request):
@@ -76,7 +76,13 @@ class RegisterManager(APIView):
                 }
                 return Response(data)
             else:
-                return Response({'msg':"You are not authorized"},status=status.HTTP_403_FORBIDDEN)
+                return Response({'msg':status_message.NOT_AUTHORIZED},status=status.HTTP_403_FORBIDDEN)
         else:
-            return Response({'msg':"You are not authenticated"},status = status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg':status_message.NOT_AUTHENTICATED},status = status.HTTP_401_UNAUTHORIZED)
 
+class LogoutView(APIView):
+     def post(self, request):
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({'msg':'Logout Successfully'})
