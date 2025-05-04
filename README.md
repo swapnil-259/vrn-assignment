@@ -1,4 +1,4 @@
-vrn-assignment: Event Management System
+Event Management System
 
 Project Overview
 
